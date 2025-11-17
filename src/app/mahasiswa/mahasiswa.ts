@@ -15,44 +15,47 @@ export class Mahasiswa implements AfterViewInit {
   data: any;
   table1: any;
 
-  constructor(private httpClient: HttpClient){}
+  constructor(private httpClient: HttpClient) { }
 
   ngAfterViewInit(): void {
+    this.table1 = $('#table1').DataTable({
+      "responsive": true,
+      "autoWidth": false,
+    });
 
-   this.table1= $("#table1").DataTable();
-   this.bindMahasiswa();
+    this.bindMahasiswa();
   }
 
   bindMahasiswa(): void {
-  this.httpClient.get("https://stmikpontianak.cloud/011100862/tampilMahasiswa.php").subscribe((data: any) => {
-    console.table(data);
-    this.table1.clear();
+    this.httpClient.get("https://stmikpontianak.cloud/011100862/tampilMahasiswa.php").subscribe((data: any) => {
+      console.table(data);
+      this.table1.clear();
 
-    data.forEach((element: any) => {
-      var tempatTanggalLahir = element.TempatLahir + ", " + element.TanggalLahir;
+      data.forEach((element: any) => {
+        var tempatTanggalLahir = element.TempatLahir + ", " + element.TanggalLahir;
 
-      const jenisKelaminFormatted = element.JenisKelamin + " " + (
-        (element.JenisKelamin == "Perempuan" || element.JenisKelamin == "perempuan") ?
-        "<i class='fas fa-venus text-danger'></i>" :
-        (element.JenisKelamin != "undefined") ?
-        "<i class='fas fa-mars text-primary'></i>" : ""
-      );
+        const jenisKelaminFormatted = element.JenisKelamin + " " + (
+          (element.JenisKelamin == "Perempuan" || element.JenisKelamin == "perempuan") ?
+            "<i class='fas fa-venus text-danger'></i>" :
+            (element.JenisKelamin != "undefined") ?
+              "<i class='fas fa-mars text-primary'></i>" : ""
+        );
 
-      var row = [
-        element.NIM, element.Nama,
-        jenisKelaminFormatted,
-        tempatTanggalLahir,
-        element.JP,
-        element.Alamat,
-        element.StatusNikah,
-        element.TahunMasuk
-      ]
+        var row = [
+          element.NIM, element.Nama,
+          jenisKelaminFormatted,
+          tempatTanggalLahir,
+          element.JP,
+          element.Alamat,
+          element.StatusNikah,
+          element.TahunMasuk
+        ]
 
-      this.table1.row.add(row);
+        this.table1.row.add(row);
+      });
+
+      this.table1.draw(false);
     });
-
-    this.table1.draw(false);
-  });
-}
+  }
 
 }
