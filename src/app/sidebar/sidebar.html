@@ -64,14 +64,26 @@
           </ul>
         </li>
         <li class="nav-item">
-            <a [routerLink]="['/mahasiswa']" routerLinkActive="router-link-active"
-              class="nav-link {{ (moduleName == 'mahasiswa') ? 'active' : '' }}">
-              <i class="fas fa-graduation-cap"></i>
-              <p>
-                Mahasiswa
-              </p>
-            </a>
-          </li>
+          <a [routerLink]="['/mahasiswa']" routerLinkActive="router-link-active"
+            class="nav-link {{ (moduleName == 'mahasiswa') ? 'active' : '' }}">
+            <i class="fas fa-graduation-cap"></i>
+            <p>
+              Mahasiswa
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/mahasiswa" class="nav-link">
+            <i class="nav-icon fas fa-th"></i>
+            <p>Mahasiswa (Non-router)</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link" onclick="toggleBootstrapTheme()">
+            <i class="nav-icon fas fa-adjust"></i>
+            <p id="bs-theme-label">Dark Mode</p>
+          </a>
+        </li>
         <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-copy"></i>
